@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae8fe9c2-0e44-4c59-94da-a2b6cd296180" name="Changes" comment="Данные добавлены в БД">
-      <change afterPath="$PROJECT_DIR$/add_people.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db_connection.py" afterDir="false" />
+    <list default="true" id="ae8fe9c2-0e44-4c59-94da-a2b6cd296180" name="Changes" comment="Параметры подключения к БД вынесены в отдельный файл;&#10;Написан модуль добавления тестовых рандомных записей в таблицу 'people'">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/add_people.py" beforeDir="false" afterPath="$PROJECT_DIR$/add_people.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_connection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myapi.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapi.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,21 +25,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "x359x"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;x359x&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/x359x/DA_petproject.git",
-    "accountId": "0196b4ec-8aba-4f37-bf01-55fa80a2a637"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/x359x/DA_petproject.git&quot;,
+    &quot;accountId&quot;: &quot;0196b4ec-8aba-4f37-bf01-55fa80a2a637&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2p0mGBtyzZgJubTjtStJf64X6ap" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -48,12 +48,58 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.add_people.executor": "Run",
+    "Python.db_connection.executor": "Run",
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="add_people" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="DA_petproject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/add_people.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="db_connection" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="DA_petproject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/db_connection.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="DA_petproject" />
       <option name="ENV_FILES" value="" />
@@ -76,6 +122,12 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.db_connection" />
+        <item itemvalue="Python.add_people" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -125,7 +177,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731923183382</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Параметры подключения к БД вынесены в отдельный файл;&#10;Написан модуль добавления тестовых рандомных записей в таблицу 'people'">
+      <option name="closed" value="true" />
+      <created>1731924189793</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1731924189793</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -143,7 +203,8 @@
     <MESSAGE value="Получение данных из открытого API REST Countries" />
     <MESSAGE value="Создание таблицы 'countries' в PostgreSQL при помощи SQLalchemy" />
     <MESSAGE value="Данные добавлены в БД" />
-    <option name="LAST_COMMIT_MESSAGE" value="Данные добавлены в БД" />
+    <MESSAGE value="Параметры подключения к БД вынесены в отдельный файл;&#10;Написан модуль добавления тестовых рандомных записей в таблицу 'people'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Параметры подключения к БД вынесены в отдельный файл;&#10;Написан модуль добавления тестовых рандомных записей в таблицу 'people'" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -159,18 +220,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/myapi.py</url>
-          <line>51</line>
+          <line>46</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/myapi.py</url>
-          <line>45</line>
+          <line>40</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/myapi.py</url>
-          <line>47</line>
+          <line>42</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/add_people.py</url>
+          <line>34</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/add_people.py</url>
+          <line>46</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

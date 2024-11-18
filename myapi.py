@@ -22,10 +22,6 @@ def fetch_data() -> list:
     return countries_data
 
 
-
-
-
-
 class Country(dbcon.Base):
     __tablename__ = 'countries'
 
@@ -34,7 +30,6 @@ class Country(dbcon.Base):
     capital = Column(String)
     currency = Column(String)
     population = Column(Integer)
-
 
 dbcon.Base.metadata.create_all(dbcon.engine)
 

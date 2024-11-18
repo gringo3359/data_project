@@ -1,9 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 
+file_path = '/Users/onetwo/Downloads/pwd.txt'
+
+with open(file_path, 'r') as file:
+    pwd = file.readline().strip()
+
 
 username = 'onetwo'
-password = 'ffactory61'
+password = pwd
 host = 'localhost'
 port = '5434'
 database = 'pet_project'

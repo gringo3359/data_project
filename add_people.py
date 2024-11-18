@@ -1,7 +1,7 @@
 import random
 import db_connection as dbcon
 from datetime import datetime, timedelta
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 
 class Person(dbcon.Base):
@@ -11,6 +11,8 @@ class Person(dbcon.Base):
     age = Column(Integer)
     dob = Column(String)  # Форматирование даты в строку 'дд/мм/гггг'
     country_id = Column(Integer)
+
+dbcon.Base.metadata.create_all(dbcon.engine)
 
 def generate_random_name():
     first_names = ['John', 'Jane', 'Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace', 'Hannah']
@@ -37,6 +39,7 @@ def add_people_to_db(session):
     for country_id in range(1, 16):
         for _ in range(5):
             name = generate_random_name()
+            print('fergerg')
             dob, dob_date = generate_random_dob()
             age = calculate_age(dob)
             person = Person(id=id_counter, name=name, age=age, dob=dob, country_id=country_id)
@@ -44,9 +47,9 @@ def add_people_to_db(session):
             id_counter += 1
 
     # Замените строку подключения на вашу
-    dbcon.Base.metadata.create_all(dbcon.DATABASE_URL)
 
-    Session = sessionmaker(bind=dbcon.DATABASE_URL)
+
+    Session = sessionmaker(bind=dbcon.engine)
     session = Session()
     add_people_to_db(session)
     session.commit()

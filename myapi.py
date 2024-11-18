@@ -7,7 +7,7 @@ import psycopg2
 
 
 def fetch_data():
-    # URL API
+
     url = 'https://restcountries.com/v3.1/all'
 
     try:
@@ -20,22 +20,19 @@ def fetch_data():
         print(f"Произошла ошибка при запросе: {err}")
 
 
-# Замените следующие параметры на свои значения
-username = 'onetwo'  # ваше имя пользователя
-password = 'ffactory61'  # ваш пароль
-host = 'localhost'  # адрес вашего сервера, может быть localhost
-port = '5434'  # стандартный порт для PostgreSQL
-database = 'pet_project'  # название вашей базы данных
 
-# Строка подключения
+username = 'onetwo'
+password = 'ffactory61'
+host = 'localhost'
+port = '5434'
+database = 'pet_project'
+
 DATABASE_URL = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
 
-# Создаем движок и базу данных
 engine = create_engine(DATABASE_URL)
 Base = declarative_base()
 
 
-# Определяем модель таблицы
 class Country(Base):
     __tablename__ = 'countries'
 
@@ -46,11 +43,9 @@ class Country(Base):
     population = Column(Integer)
 
 
-# Создаем таблицы
 Base.metadata.create_all(engine)
 
 
-# Функция для вставки данных в базу данных
 def insert_data(countries_data):
     Session = sessionmaker(bind=engine)
     session = Session()

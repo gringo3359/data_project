@@ -4,11 +4,11 @@ from sqlalchemy.ext.declarative import declarative_base
 file_path = '/Users/onetwo/Downloads/pwd.txt'
 
 with open(file_path, 'r') as file:
-    pwd = file.readline().strip()
+    pswd = file.readline().strip()
 
 
 username = 'onetwo'
-password = pwd
+password = pswd
 host = 'localhost'
 port = '5434'
 database = 'pet_project'

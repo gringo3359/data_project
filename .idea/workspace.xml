@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae8fe9c2-0e44-4c59-94da-a2b6cd296180" name="Changes" comment="Параметры подключения к БД вынесены в отдельный файл;&#10;Написан модуль добавления тестовых рандомных записей в таблицу 'people'">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/add_people.py" beforeDir="false" afterPath="$PROJECT_DIR$/add_people.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_connection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myapi.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapi.py" afterDir="false" />
-    </list>
+    <list default="true" id="ae8fe9c2-0e44-4c59-94da-a2b6cd296180" name="Changes" comment="pwd" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -185,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731924189793</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="pwd">
+      <option name="closed" value="true" />
+      <created>1731926552188</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731926552188</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -204,7 +207,8 @@
     <MESSAGE value="Создание таблицы 'countries' в PostgreSQL при помощи SQLalchemy" />
     <MESSAGE value="Данные добавлены в БД" />
     <MESSAGE value="Параметры подключения к БД вынесены в отдельный файл;&#10;Написан модуль добавления тестовых рандомных записей в таблицу 'people'" />
-    <option name="LAST_COMMIT_MESSAGE" value="Параметры подключения к БД вынесены в отдельный файл;&#10;Написан модуль добавления тестовых рандомных записей в таблицу 'people'" />
+    <MESSAGE value="pwd" />
+    <option name="LAST_COMMIT_MESSAGE" value="pwd" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

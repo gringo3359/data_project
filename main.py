@@ -1,6 +1,5 @@
 import myapi
 
 
-
 if __name__ == '__main__':
-    myapi.fetch_data()
+    myapi.insert_data(myapi.fetch_data())

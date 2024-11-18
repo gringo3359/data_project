@@ -1,12 +1,12 @@
 
 import requests
-from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy import create_engine, Column, Integer, String, JSON
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-import psycopg2
 
 
-def fetch_data():
+
+def fetch_data() -> list:
 
     url = 'https://restcountries.com/v3.1/all'
 
@@ -14,10 +14,12 @@ def fetch_data():
         response = requests.get(url)
 
         if response.status_code == 200:
-            users = response.json()
+            countries_data = response.json()
 
     except requests.exceptions.RequestException as err:
         print(f"Произошла ошибка при запросе: {err}")
+
+    return countries_data
 
 
 
@@ -51,15 +53,18 @@ def insert_data(countries_data):
     session = Session()
 
     for country in countries_data:
+        curr = country['currencies'] if 'currencies' in country else None
+        country_name = country['name']
+
         country_entry = Country(
-            name=country.get('name'),
-            capital=country.get('capital'),
-            currency=country.get('currencies')[0].get('name') if 'currencies' in country and len(
-                country['currencies']) > 0 else None,
+            name=country_name.get('common'),
+            capital=country['capital'][0] if 'capital' in country else None,
+            currency=[name['name'] for name in curr.values()][0] if curr is not None else None,
             population=country.get('population')
         )
         session.add(country_entry)
 
     session.commit()
     session.close()
+
 

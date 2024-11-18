@@ -1,7 +1,7 @@
 
 import requests
-from sqlalchemy import create_engine, Column, Integer, String, JSON
-from sqlalchemy.ext.declarative import declarative_base
+import db_connection as dbcon
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 
 
@@ -23,19 +23,10 @@ def fetch_data() -> list:
 
 
 
-username = 'onetwo'
-password = 'ffactory61'
-host = 'localhost'
-port = '5434'
-database = 'pet_project'
-
-DATABASE_URL = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
-
-engine = create_engine(DATABASE_URL)
-Base = declarative_base()
 
 
-class Country(Base):
+
+class Country(dbcon.Base):
     __tablename__ = 'countries'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -45,11 +36,11 @@ class Country(Base):
     population = Column(Integer)
 
 
-Base.metadata.create_all(engine)
+dbcon.Base.metadata.create_all(dbcon.engine)
 
 
 def insert_data(countries_data):
-    Session = sessionmaker(bind=engine)
+    Session = sessionmaker(bind=dbcon.engine)
     session = Session()
 
     for country in countries_data:

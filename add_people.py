@@ -54,3 +54,4 @@ def add_people_to_db(session):
     add_people_to_db(session)
     session.commit()
     session.close()
+

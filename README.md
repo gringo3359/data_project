@@ -8,3 +8,5 @@
 - построение аналитических дашбордов.
 
 Стек: Python (requests, Pandas, SQLalchemy), PostgreSQL, Yandex DataLens
+
+Проект находится на стадии доработки

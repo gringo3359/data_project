@@ -5,7 +5,6 @@ import pandas as pd
 import db_connection as dbcon
 import asyncio
 
-#591237445
 with dbcon.engine.connect() as connection:
     query = text(f'SELECT * FROM the_oldest_people_by_countries')
     result = connection.execute(query)
@@ -15,11 +14,13 @@ with dbcon.engine.connect() as connection:
 csv_file = f'{dt.datetime.now()}.csv'
 df.to_csv(csv_file, index=False)
 
-telegram_token = '7668577240:AAFHnCVhZw-K5iWU-B7SLhqjmFXnjz3muTg'
-chat_id = '591237445'
+file_path = '/Users/onetwo/Downloads/tg.txt'
 
-bot = Bot(token=telegram_token)
+with open(file_path, 'r') as file:
+    tg = file.readline().split()
+
+bot = Bot(token=tg[0])
 
 with open(csv_file, 'rb') as file:
-    asyncio.run(bot.send_document(chat_id=chat_id, document=file))
+    asyncio.run(bot.send_document(chat_id=tg[1], document=file))
 

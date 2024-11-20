@@ -6,7 +6,7 @@
 - работа с БД;
 - работа с Telegram-ботом;
 - построение аналитических дашбордов
-- прогнозироване.
+- прогнозирование.
 
 Стек: Python (Requests, Pandas, SQLalchemy, Scikit-learn), PostgreSQL, Yandex DataLens
 

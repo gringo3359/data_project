@@ -5,6 +5,9 @@
 - преобразование данных;
 - работа с БД;
 - работа с Telegram-ботом;
-- построение аналитических дашбордов.
+- построение аналитических дашбордов
+- прогнозирование.
 
-Стек: Python (requests, Pandas, SQLalchemy), PostgreSQL, Yandex DataLens
+Стек: Python (Requests, Pandas, SQLalchemy, Scikit-learn), PostgreSQL, Yandex DataLens
+
+Проект находится на стадии вечной доработки.

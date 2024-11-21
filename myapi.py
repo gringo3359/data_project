@@ -1,10 +1,7 @@
-
 import requests
 import db_connection as dbcon
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import sessionmaker
-
-
 
 def fetch_data() -> list:
 

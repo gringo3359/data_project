@@ -30,7 +30,6 @@ class Country(dbcon.Base):
 
 dbcon.Base.metadata.create_all(dbcon.engine)
 
-
 def insert_data(countries_data):
     Session = sessionmaker(bind=dbcon.engine)
     session = Session()

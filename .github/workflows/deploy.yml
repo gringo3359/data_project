@@ -1,0 +1,29 @@
+name: Deploy to Yandex Cloud Storage
+
+on:
+  push:
+    branches:
+      - master  # Эта настройка запускает процесс при каждом пуше в ветку main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+
+    - name: Upload Python and SQL files to Yandex Cloud Storage
+      run: |
+        # Создаем директорию для хранения файлов
+        mkdir -p files
+        
+        # Копируем Python и SQL файлы в директорию
+        cp *.py files/
+        cp *.sql files/
+
+        # Авторизуемся с помощью ключа сервисного аккаунта
+        echo "${{ secrets.YC_CLOUD_KEY }}" > yc-key.json
+        yc config set service-account-key yc-key.json
+        yc config set folder-id https://console.yandex.cloud/folders/b1gu9p195r1it7d7ram0
+        
+        # Загрузка файлов в бакет
+        yc storage cp files/* "s3://test-gringo-bucket/" --recursive

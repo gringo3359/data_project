@@ -10,6 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: Check if Python and SQL files exist
+      run: |
+        if ls *.py 1> /dev/null 2>&1; then
+          echo "Python files found!"
+        else
+          echo "No Python files found!"
+        fi
+    
+        if ls *.sql 1> /dev/null 2>&1; then
+          echo "SQL files found!"
+        else
+          echo "No SQL files found!"
+        fi
 
     - name: Upload Python and SQL files to Yandex Cloud Storage
       run: |

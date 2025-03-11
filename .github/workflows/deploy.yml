@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: List files in current directory
+      run: ls -la
+      
     - name: Check if Python and SQL files exist
       run: |
         if ls *.py 1> /dev/null 2>&1; then

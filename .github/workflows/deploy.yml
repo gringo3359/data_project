@@ -34,7 +34,7 @@ jobs:
         
         # Копируем Python и SQL файлы в директорию
         cp *.py files/
-        cp *.sql files/
+        cp SQL_scripts.sql files/
 
         # Авторизуемся с помощью ключа сервисного аккаунта
         echo "${{ secrets.YC_CLOUD_KEY }}" > yc-key.json

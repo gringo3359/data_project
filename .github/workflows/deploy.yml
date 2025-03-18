@@ -1,38 +1,39 @@
-name: Deploy to Yandex Cloud Storage
+name: Deploy to Yandex Cloud
 
 on:
   push:
     branches:
-      - master  # Эта настройка запускает процесс при каждом пуше в ветку main
+      - main  # или другая ветка, которую хотите отслеживать
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     
     steps:
-    - name: List files in current directory
-      run: ls -la
-      
-    - name: Check if Python and SQL files exist
-      run: |
-        if ls *.sql 1> /dev/null 2>&1; then
-          echo "SQL files found!"
-        else
-          echo "No SQL files found!"
-        fi
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Set up Python (для работы с Yandex Cloud CLI)
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
 
-    - name: Upload Python and SQL files to Yandex Cloud Storage
+    - name: Install Yandex Cloud CLI
       run: |
-        # Создаем директорию для хранения файлов
-        mkdir -p files
-        
-        # Копируем Python и SQL файлы в директорию
-        cp SQL_scripts.sql files/
-
-        # Авторизуемся с помощью ключа сервисного аккаунта
-        echo "${{ secrets.YC_CLOUD_KEY }}" > yc-key.json
-        yc config set service-account-key yc-key.json
-        yc config set folder-id https://console.yandex.cloud/folders/b1gu9p195r1it7d7ram0
-        
-        # Загрузка файлов в бакет
-        yc storage cp files/* "s3://test-gringo-bucket/" --recursive
+        curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+        export PATH=$PATH:$HOME/.local/bin
+        yc version
+    
+    - name: Authenticate with Yandex Cloud
+      run: |
+        echo "${{ secrets.YANDEX_CLOUD_KEY }}" > /tmp/key.json
+        yc config profile create --name my-profile --service-account-key /tmp/key.json
+        yc config set folder-id YOUR_FOLDER_ID
+    
+    - name: Upload files to Yandex Cloud Bucket
+      run: |
+        # Команда для загрузки файлов в бакет
+        yc storage cp -r ./ ${Yandex_BUCKET_NAME}/${Yandex_FOLDER}/
+      env:
+        Yandex_BUCKET_NAME: ${{ secrets.YANDEX_BUCKET_NAME }}
+        Yandex_FOLDER: ${{ secrets.YANDEX_FOLDER }}

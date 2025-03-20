@@ -1,33 +1,39 @@
-name: Upload to Yandex Object Storage
+name: Sync to Yandex Cloud
 
 on:
   push:
     branches:
-      - master
+      - main  # или ветка, на которой вы хотите запускать процесс
 
 jobs:
-  upload:
+  sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Check out repository
+      uses: actions/checkout@v2
 
-      - name: Set up Yandex Cloud CLI
-        run: |
-          curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-          sudo mv ~/.yc/yc /usr/local/bin/yc
-          yc config set token ${{ secrets.YC_ACCESS_KEY_ID }}
+    - name: Set up Yandex Cloud CLI
+      run: |
+        curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+        sudo mv /home/runner/yandex-cloud/yc /usr/local/bin/yc
 
-      - name: Upload files to Yandex Object Storage
-        run: |
-          # Укажите путь к вашим файлам или директории
-          DIR_TO_UPLOAD="./*"
-          
-          # Целевая директория в бакете
-          TARGET_DIR="proj/"
+    - name: Configure Yandex Cloud CLI
+      env:
+        YC_API_KEY: ${{ secrets.YC_API_KEY }}  # Используем секрет для API-ключа
+        YC_CLOUD_ID: ${{ secrets.YC_CLOUD_ID }}
+        YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
+        YANDEX_BUCKET_NAME: ${{ secrets.YANDEX_BUCKET_NAME }}
+      run: |
+        yc config set service-account-key $YC_API_KEY
+        yc config set cloud-id $YC_CLOUD_ID
+        yc config set folder-id $YC_FOLDER_ID
+        yc config set default-bucket $YANDEX_BUCKET_NAME
 
-          # Загружаем файлы в Yandex Object Storage
-          for file in $DIR_TO_UPLOAD; do
-            yc storage cp $file s3://${{ secrets.YANDEX_BUCKET_NAME }}/$TARGET_DIR/$(basename $file)
-          done
+    - name: Upload changed files to Yandex Cloud
+      run: |
+        # Находим измененные файлы
+        git diff --name-only HEAD^ HEAD | while read file; do
+          # Загружаем измененные файлы в бакет Yandex Cloud
+          yc storage cp $file "s3://$YANDEX_BUCKET_NAME/proj/$file" --recursive
+        done

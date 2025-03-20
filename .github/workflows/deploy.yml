@@ -1,41 +1,33 @@
-name: Deploy to Yandex Cloud
+name: Upload to Yandex Object Storage
 
 on:
   push:
     branches:
-      - master  # или другая ветка, которую хотите отслеживать
+      - master
 
 jobs:
-  deploy:
+  upload:
     runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    
-    - name: Set up Python (для работы с Yandex Cloud CLI)
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
 
-    - name: Install Yandex Cloud CLI
-      run: |
-        curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-        export PATH=$PATH:$HOME/.local/bin
-        echo "Current PATH: $PATH"  # Выводим значение PATH, чтобы убедиться, что путь добавлен
-        which yc  # Проверяем, где находится yc, если он установлен
-        yc version
-    
-    - name: Authenticate with Yandex Cloud
-      run: |
-        echo "${{ secrets.YANDEX_CLOUD_KEY }}" > /tmp/key.json
-        yc config profile create --name my-profile --service-account-key /tmp/key.json
-        yc config set folder-id YOUR_FOLDER_ID
-    
-    - name: Upload files to Yandex Cloud Bucket
-      run: |
-        # Команда для загрузки файлов в бакет
-        yc storage cp -r ./ ${Yandex_BUCKET_NAME}/${Yandex_FOLDER}/
-      env:
-        Yandex_BUCKET_NAME: ${{ secrets.YANDEX_BUCKET_NAME }}
-        Yandex_FOLDER: ${{ secrets.YANDEX_FOLDER }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Yandex Cloud CLI
+        run: |
+          curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+          sudo mv ~/.yc/yc /usr/local/bin/yc
+          yc config set token ${{ secrets.YC_ACCESS_KEY_ID }}
+
+      - name: Upload files to Yandex Object Storage
+        run: |
+          # Укажите путь к вашим файлам или директории
+          DIR_TO_UPLOAD="./*"
+          
+          # Целевая директория в бакете
+          TARGET_DIR="proj/"
+
+          # Загружаем файлы в Yandex Object Storage
+          for file in $DIR_TO_UPLOAD; do
+            yc storage cp $file s3://${{ secrets.YANDEX_BUCKET_NAME }}/$TARGET_DIR/$(basename $file)
+          done

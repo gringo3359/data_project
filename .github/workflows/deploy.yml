@@ -17,7 +17,7 @@ jobs:
 
     - name: Install Yandex Cloud CLI (yc)
       run: |
-        # Установка Yandex Cloud CLI (yc)
+        # Установка Yandex Cloud CLI (yc)р
         curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
         exec -l $SHELL
         # Проверка установки

@@ -25,7 +25,7 @@ jobs:
 
     - name: check installation
       run: |
-        ls /home/runner/
+        ls /home/runner/yandex-cloud/bin/
 
     - name: Configure Yandex Cloud CLI (yc)
       env:

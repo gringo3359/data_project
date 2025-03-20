@@ -16,7 +16,7 @@ jobs:
 
     - name: Configure Yandex Cloud CLI (yc)
       env:
-        YC_ACCESS_KEY: ${{ secrets.YC_KEY_ID}
+        YC_ACCESS_KEY: ${{ secrets.YC_KEY_ID }}
         YC_SECRET_KEY: ${{ secrets.YC_API_KEY }}
         YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
         YC_BUCKET_NAME: ${{ secrets.YANDEX_BUCKET_NAME }}

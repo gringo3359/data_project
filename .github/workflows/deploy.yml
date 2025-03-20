@@ -3,7 +3,7 @@ name: Sync to Yandex Cloud
 on:
   push:
     branches:
-      - master  # или ветка, на которой вы хотите запускать процесс
+      - master  
 
 jobs:
   sync:
@@ -16,11 +16,12 @@ jobs:
     - name: Set up Yandex Cloud CLI
       run: |
         curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+        source "/home/runner/.bashrc"
         sudo mv /home/runner/yandex-cloud/yc /usr/local/bin/yc
 
     - name: Configure Yandex Cloud CLI
       env:
-        YC_API_KEY: ${{ secrets.YC_API_KEY }}  # Используем секрет для API-ключа
+        YC_API_KEY: ${{ secrets.YC_API_KEY }}  
         YC_CLOUD_ID: ${{ secrets.YC_CLOUD_ID }}
         YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
         YANDEX_BUCKET_NAME: ${{ secrets.YANDEX_BUCKET_NAME }}

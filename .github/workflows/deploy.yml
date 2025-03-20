@@ -14,6 +14,15 @@ jobs:
       with:
         fetch-depth: 0  # Для доступа к истории коммитов
 
+    - name: Install Yandex Cloud CLI
+      run: |
+        # Загрузка и установка Yandex Cloud CLI
+        curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+        # Перемещаем yc в папку, доступную в PATH
+        sudo mv /home/runner/yandex-cloud/yc /usr/local/bin/yc
+        # Проверка установки
+        yc --version
+
     - name: Configure Yandex Cloud CLI (yc)
       env:
         YC_ACCESS_KEY: ${{ secrets.YC_KEY_ID }}

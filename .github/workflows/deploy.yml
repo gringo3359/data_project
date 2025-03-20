@@ -26,7 +26,7 @@ jobs:
     - name: check installation
       run: |
         sudo mv /home/runner/yandex-cloud/bin/yc /usr/local/bin/yc
-        yc iam key create --service-account-name test-role --output key.json --folder-id b1gu9p195r1it7d7ram0
+   
         
 
     - name: Configure Yandex Cloud CLI (yc)

@@ -20,7 +20,10 @@ jobs:
         curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
         exec -l $SHELL
         source "/home/runner/.bashrc"
-        ls /home/runner/yandex-cloud/
+        ls -l /home/runner/yandex-cloud/
+        # Убедимся, что yc теперь в пути
+        echo "Checking PATH:"
+        echo $PATH
         # Перемещаем yc в папку, доступную в PATH
         sudo mv /home/runner/yandex-cloud/yc /usr/local/bin/yc
         # Проверка установки

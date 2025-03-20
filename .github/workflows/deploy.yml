@@ -30,6 +30,7 @@ jobs:
     - name: Print secret (опасно)
       run: |
         echo "My secret is: ${{ secrets.YC_SERVIVE_ACCOUNT_KEY }}"
+        echo "My secret is: ${{ secrets.YANDEX_BUCKET_NAME }}"
    
         
 

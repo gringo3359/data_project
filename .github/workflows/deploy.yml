@@ -27,10 +27,6 @@ jobs:
       run: |
         sudo mv /home/runner/yandex-cloud/bin/yc /usr/local/bin/yc
         yc iam key create --service-account-name test-role --output key.json --folder-id b1gu9p195r1it7d7ram0
-        ls /home/runner/
-        echo "---------"
-        ls /home/runner/yandex-cloud/bin/
-        echo "---------"
         
 
     - name: Configure Yandex Cloud CLI (yc)
@@ -39,6 +35,7 @@ jobs:
       run: |
         # Настройка Yandex Cloud CLI
         echo "${{ secrets.YC_SERVICE_ACCOUNT_KEY }}" > /home/runner/yc-service-account-key.json
+        jq . /home/runner/yc-service-account-key.json
         yc config set service-account-key /home/runner/yc-service-account-key.json
         yc config set secret-key ${{ secrets.YC_SECRET_KEY }}
         # Мы не указываем cloud-id и folder-id, так как они обычно могут быть получены из ваших настроек в облаке (по умолчанию)

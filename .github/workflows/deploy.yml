@@ -14,6 +14,18 @@ jobs:
       with:
         fetch-depth: 0  # Для доступа к истории коммитов
 
+    - name: Configure Yandex Cloud CLI (yc)
+      env:
+        YC_ACCESS_KEY: ${{ secrets.YC_KEY_ID}
+        YC_SECRET_KEY: ${{ secrets.YC_API_KEY }}
+        YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
+        YC_BUCKET_NAME: ${{ secrets.YANDEX_BUCKET_NAME }}
+      run: |
+        yc config set access-key $YC_ACCESS_KEY
+        yc config set secret-key $YC_SECRET_KEY
+        yc config set cloud-id $YC_CLOUD_ID
+        yc config set folder-id $YC_FOLDER_ID
+
     - name: Configure AWS CLI
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.YC_KEY_ID }}
@@ -48,6 +60,6 @@ jobs:
         fi
         for file in $CHANGED_FILES; do
           if [ -f "$file" ]; then
-            aws s3 cp "$file" "s3://${YC_BUCKET}/${YC_DIR}${file}"
+            yc storage cp "$file" "s3://${YC_BUCKET}/${YC_DIR}${file}"
           fi
         done

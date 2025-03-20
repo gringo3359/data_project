@@ -31,7 +31,8 @@ jobs:
         if [ "${{ github.event.before }}" == "0000000000000000000000000000000000000000" ]; then
           files=$(git ls-tree -r HEAD --name-only)
         else
-          files=$(git diff --name-only --diff-filter=d ${{ github.event.before }} ${{ github.event.after }})
+          files=$(git diff --stat ${{ github.event.before }} ${{ github.event.after }}
+                  git diff ${{ github.event.before }} ${{ github.event.after }} --name-status)
         fi
         echo "changed_files<<EOF" >> $GITHUB_OUTPUT
         echo "$files" >> $GITHUB_OUTPUT

@@ -14,26 +14,12 @@ jobs:
       with:
         fetch-depth: 0  # Для доступа к истории коммитов
 
-    - name: Configure AWS CLI
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.YC_API_KEY }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_KEY_ID }}
-      run: |
-        aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-        aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-        aws configure set default.region ru-central1
-        aws configure set default.s3.endpoint_url https://storage.yandexcloud.net
-        aws configure set default.s3.signature_version s3v4
-
     - name: Get changed files
+      id: get_changed_files
       run: |
-        git diff --name-only HEAD^ HEAD
         files=$(git diff --name-only HEAD^ HEAD)
-        echo "changed_files<<EOF" >> $GITHUB_OUTPUT
-        echo "$files" >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
-        echo "$GITHUB_OUTPUT"
-        
+        echo "changed_files=$files" >> $GITHUB_ENV  # Записываем измененные файлы в переменную окружения
+
     - name: Debug git diff
       run: |
         git diff --stat ${{ github.event.before }} ${{ github.event.after }}
@@ -43,12 +29,13 @@ jobs:
       env:
         YC_BUCKET: ${{ secrets.YANDEX_BUCKET_NAME }}
         YC_DIR: "proj/"  # Замените на вашу директорию
+        CHANGED_FILES: ${{ env.changed_files }}  # Передаем измененные файлы как переменную окружения
       run: |
-        if [ -z "$files" ]; then
+        if [ -z "$CHANGED_FILES" ]; then
           echo "Нет измененных файлов"
           exit 0
         fi
-        for file in $files; do
+        for file in $CHANGED_FILES; do
           if [ -f "$file" ]; then
             aws s3 cp "$file" "s3://${YC_BUCKET}/${YC_DIR}${file}"
           fi

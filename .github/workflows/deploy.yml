@@ -44,11 +44,11 @@ jobs:
         YC_BUCKET: ${{ secrets.YANDEX_BUCKET_NAME }}
         YC_DIR: "proj/"  # Замените на вашу директорию
       run: |
-        if [ -z "${{ steps.changed-files.outputs.changed_files }}" ]; then
+        if [ -z "$files" ]; then
           echo "Нет измененных файлов"
           exit 0
         fi
-        for file in ${{ steps.changed-files.outputs.changed_files }}; do
+        for file in $files; do
           if [ -f "$file" ]; then
             aws s3 cp "$file" "s3://${YC_BUCKET}/${YC_DIR}${file}"
           fi

@@ -26,6 +26,10 @@ jobs:
     - name: check installation
       run: |
         sudo mv /home/runner/yandex-cloud/bin/yc /usr/local/bin/yc
+
+    - name: Print secret (опасно)
+      run: |
+        echo "My secret is: ${{ secrets.YC_SERVIVE_ACCOUNT_KEY }}"
    
         
 

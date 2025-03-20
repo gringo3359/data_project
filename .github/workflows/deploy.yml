@@ -33,7 +33,7 @@ jobs:
         YC_BUCKET_NAME: ${{ secrets.YANDEX_BUCKET_NAME }}
       run: |
         # Настройка Yandex Cloud CLI
-        export YC_ACCESS_KEY="YCAJEVWt_rIgaa-J8AQJcJPKZ"
+        export YC_ACCESS_KEY="ajevdblsprik5dm7ip19"
         export YC_SECRET_KEY="YCN_UQtgMRQ67QTNVhmx20PXOS9Y20DRFsn6fntG"
 
         yc config set access-key $YC_ACCESS_KEY

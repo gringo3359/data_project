@@ -18,6 +18,7 @@ jobs:
       run: |
         # Загрузка и установка Yandex Cloud CLI
         curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+        source "/home/runner/.bashrc"
         # Перемещаем yc в папку, доступную в PATH
         sudo mv /home/runner/yandex-cloud/yc /usr/local/bin/yc
         # Проверка установки

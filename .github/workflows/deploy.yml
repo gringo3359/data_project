@@ -19,7 +19,7 @@ jobs:
       run: |
         # Установка Yandex Cloud CLI (yc)
         curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-        source "/home/runner/.bashrc"
+        exec -l $SHELL
         # Проверка установки
         yc --version
 

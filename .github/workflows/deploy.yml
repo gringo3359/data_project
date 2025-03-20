@@ -32,6 +32,7 @@ jobs:
         echo "changed_files<<EOF" >> $GITHUB_OUTPUT
         echo "$files" >> $GITHUB_OUTPUT
         echo "EOF" >> $GITHUB_OUTPUT
+        echo $GITHUB_OUTPUT
         
     - name: Debug git diff
       run: |

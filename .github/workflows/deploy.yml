@@ -40,7 +40,6 @@ jobs:
       run: |
         # Настройка Yandex Cloud CLI
         echo "${{ secrets.YC_ACCESS_KEY }}" > /home/runner/yc-service-account-key.json
-        jq . /home/runner/yc-service-account-key.json
         yc config set service-account-key /home/runner/yc-service-account-key.json
         yc config set secret-key ${{ secrets.YC_SECRET_KEY }}
         # Мы не указываем cloud-id и folder-id, так как они обычно могут быть получены из ваших настроек в облаке (по умолчанию)

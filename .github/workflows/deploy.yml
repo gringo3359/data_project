@@ -38,6 +38,7 @@ jobs:
       env:
         YC_BUCKET_NAME: ${{ secrets.YANDEX_BUCKET_NAME }}
       run: |
+        yc init
         # Настройка Yandex Cloud CLI
         yc config set secret-key ${{ secrets.YC_SECRET_KEY }}
         echo "${{ secrets.YC_ACCESS_KEY }}" > /home/runner/yc-service-account-key.json

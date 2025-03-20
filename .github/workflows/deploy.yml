@@ -37,9 +37,10 @@ jobs:
         echo "$files" >> $GITHUB_OUTPUT
         echo "EOF" >> $GITHUB_OUTPUT
         
-    - name: Debug changed files
+    - name: Debug git diff
       run: |
-        echo "Changed files: ${{ steps.changed-files.outputs.changed_files }}"
+        git diff --stat ${{ github.event.before }} ${{ github.event.after }}
+        git diff ${{ github.event.before }} ${{ github.event.after }} --name-status
 
     - name: Upload files
       env:

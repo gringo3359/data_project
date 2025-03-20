@@ -24,6 +24,10 @@ jobs:
         aws configure set default.region ru-central1
         aws configure set default.s3.endpoint_url https://storage.yandexcloud.net
         aws configure set default.s3.signature_version s3v4
+        
+    - name: Debug changed files
+      run: |
+        echo "Changed files: ${{ steps.changed-files.outputs.changed_files }}"
 
     - name: Get changed files
       run: |

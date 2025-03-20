@@ -33,21 +33,10 @@ jobs:
         YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
         YC_BUCKET_NAME: ${{ secrets.YANDEX_BUCKET_NAME }}
       run: |
-        yc config set access-key $YC_ACCESS_KEY
+        yc config set service-account-key $YC_ACCESS_KEY
         yc config set secret-key $YC_SECRET_KEY
         yc config set cloud-id $YC_CLOUD_ID
         yc config set folder-id $YC_FOLDER_ID
-
-    - name: Configure AWS CLI
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.YC_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_API_KEY}}
-      run: |
-         aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-         aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-         aws configure set default.region ru-central1-a
-         aws configure set default.s3.endpoint_url https://storage.yandexcloud.net
-         aws configure set default.s3.signature_version s3v4
 
     - name: Get changed files
       id: get_changed_files

@@ -3,28 +3,23 @@ name: Sync to Yandex Cloud
 on:
   push:
     branches:
-      - master  # Укажите вашу ветку
+      - master  # Здесь укажите ветку, на которую хотите реагировать (например, main)
 
 jobs:
   sync-files:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Используем Ubuntu в качестве операционной системы для выполнения задач
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        fetch-depth: 0  # Для доступа к истории коммитов
+        fetch-depth: 0  # Нужно, чтобы иметь доступ к полному списку коммитов (если потребуется)
 
-    - name: Install Yandex Cloud CLI
+    - name: Install Yandex Cloud CLI (yc)
       run: |
-        # Загрузка и установка Yandex Cloud CLI
+        # Установка Yandex Cloud CLI (yc)
         curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
         exec -l $SHELL
-        source "/home/runner/.bashrc"
-        ls -l /home/runner/yandex-cloud/
-        # Убедимся, что yc теперь в пути
-        echo "Checking PATH:"
-        echo $PATH
-        # Перемещаем yc в папку, доступную в PATH
         sudo mv /home/runner/yandex-cloud/yc /usr/local/bin/yc
         # Проверка установки
         yc --version
@@ -33,37 +28,37 @@ jobs:
       env:
         YC_ACCESS_KEY: ${{ secrets.YC_KEY_ID }}
         YC_SECRET_KEY: ${{ secrets.YC_API_KEY }}
-        YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
         YC_BUCKET_NAME: ${{ secrets.YANDEX_BUCKET_NAME }}
       run: |
-        yc config set service-account-key $YC_ACCESS_KEY
+        # Настройка Yandex Cloud CLI
+        yc config set access-key $YC_ACCESS_KEY
         yc config set secret-key $YC_SECRET_KEY
-        yc config set cloud-id $YC_CLOUD_ID
-        yc config set folder-id $YC_FOLDER_ID
+        # Мы не указываем cloud-id и folder-id, так как они обычно могут быть получены из ваших настроек в облаке (по умолчанию)
+        yc config set cloud-id default
+        yc config set folder-id default
 
     - name: Get changed files
-      id: get_changed_files
       run: |
+        # Получаем список измененных файлов в последнем коммите
         files=$(git diff --name-only HEAD^ HEAD)
         echo "changed_files=$files" >> $GITHUB_ENV  # Записываем измененные файлы в переменную окружения
 
-    - name: Debug git diff
-      run: |
-        git diff --stat ${{ github.event.before }} ${{ github.event.after }}
-        git diff ${{ github.event.before }} ${{ github.event.after }} --name-status
-
-    - name: Upload files
+    - name: Upload files to Yandex Cloud
       env:
         YC_BUCKET: ${{ secrets.YANDEX_BUCKET_NAME }}
-        YC_DIR: "proj/"  # Замените на вашу директорию
-        CHANGED_FILES: ${{ env.changed_files }}  # Передаем измененные файлы как переменную окружения
+        YC_DIR: "proj/"  # Замените на вашу директорию в бакете
+        CHANGED_FILES: ${{ env.changed_files }}  # Переменная окружения с измененными файлами
       run: |
         if [ -z "$CHANGED_FILES" ]; then
-          echo "Нет измененных файлов"
+          echo "Нет измененных файлов, пропускаем загрузку"
           exit 0
         fi
+        # Загружаем каждый файл в Yandex Object Storage
         for file in $CHANGED_FILES; do
           if [ -f "$file" ]; then
+            echo "Загружаем файл $file в Yandex Cloud Storage"
             yc storage cp "$file" "s3://${YC_BUCKET}/${YC_DIR}${file}"
+          else
+            echo "Файл $file не существует"
           fi
         done

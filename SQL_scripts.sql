@@ -1,5 +1,5 @@
 -- Выборка самых молодых жителей по странам в виде представления
---12
+--1233
 create view the_oldest_people_by_countries (fio, age,dob,country_name) as
 
 with rn_cte as (select name, age, dob, country_id, row_number() over (partition by country_id order by dob) rn

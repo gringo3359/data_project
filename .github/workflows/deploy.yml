@@ -39,9 +39,9 @@ jobs:
         YC_BUCKET_NAME: ${{ secrets.YANDEX_BUCKET_NAME }}
       run: |
         # Настройка Yandex Cloud CLI
+        yc config set secret-key ${{ secrets.YC_SECRET_KEY }}
         echo "${{ secrets.YC_ACCESS_KEY }}" > /home/runner/yc-service-account-key.json
         yc config set service-account-key /home/runner/yc-service-account-key.json
-        yc config set secret-key ${{ secrets.YC_SECRET_KEY }}
         # Мы не указываем cloud-id и folder-id, так как они обычно могут быть получены из ваших настроек в облаке (по умолчанию)
         yc config set cloud-id default
         yc config set folder-id default

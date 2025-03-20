@@ -29,7 +29,7 @@ jobs:
 
     - name: Print secret (опасно)
       run: |
-        echo "My secret is: ${{ secrets.YC_SERVIVE_ACCOUNT_KEY }}"
+        echo "My secret is: ${{ secrets.YC_ACCESS_KEY }}"
         echo "My secret is: ${{ secrets.YANDEX_BUCKET_NAME }}"
    
         
@@ -39,7 +39,7 @@ jobs:
         YC_BUCKET_NAME: ${{ secrets.YANDEX_BUCKET_NAME }}
       run: |
         # Настройка Yandex Cloud CLI
-        echo "${{ secrets.YC_SERVICE_ACCOUNT_KEY }}" > /home/runner/yc-service-account-key.json
+        echo "${{ secrets.YC_ACCESS_KEY }}" > /home/runner/yc-service-account-key.json
         jq . /home/runner/yc-service-account-key.json
         yc config set service-account-key /home/runner/yc-service-account-key.json
         yc config set secret-key ${{ secrets.YC_SECRET_KEY }}

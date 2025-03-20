@@ -3,7 +3,7 @@ name: Sync to Yandex Cloud
 on:
   push:
     branches:
-      - main  # или ветка, на которой вы хотите запускать процесс
+      - master  # или ветка, на которой вы хотите запускать процесс
 
 jobs:
   sync:

@@ -27,6 +27,7 @@ jobs:
 
     - name: Get changed files
       run: |
+        git diff --name-only HEAD^ HEAD
         files=$(git diff --name-only HEAD^ HEAD)
         echo "changed_files<<EOF" >> $GITHUB_OUTPUT
         echo "$files" >> $GITHUB_OUTPUT

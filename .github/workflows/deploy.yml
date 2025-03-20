@@ -19,6 +19,7 @@ jobs:
         source "/home/runner/.bashrc"
         which yc
         echo 'source /home/runner/yandex-cloud/completion.zsh.inc' >>  ~/.zshrc
+        source ~/.zshrc
         sudo mv /home/runner/yandex-cloud/yc /usr/local/bin/yc
 
     - name: Configure Yandex Cloud CLI

@@ -23,6 +23,10 @@ jobs:
         sudo mv /home/runner/yandex-cloud/yc /usr/local/bin/yc
         # Проверка установки
         yc --version
+        yc --version
+        yc --version
+        yc --version
+        yc --version
 
     - name: Configure Yandex Cloud CLI (yc)
       env:

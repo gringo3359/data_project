@@ -29,7 +29,6 @@ jobs:
       run: |
         files=$(git diff --stat ${{ github.event.before }} ${{ github.event.after }}
                   git diff ${{ github.event.before }} ${{ github.event.after }} --name-status)
-        fi
         echo "changed_files<<EOF" >> $GITHUB_OUTPUT
         echo "$files" >> $GITHUB_OUTPUT
         echo "EOF" >> $GITHUB_OUTPUT
